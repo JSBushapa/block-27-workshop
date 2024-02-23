@@ -3,7 +3,8 @@ import axios from "axios"
 
 const BASE_URL = 'https://fsa-jwt-practice.herokuapp.com/signup'
 
-function SignUpForm() {
+function SignUpForm({setToken}) {
+    
     const [username, setUsername] = useState('')
     const [password, setPasswrod] = useState('')
     const [error, setError] = useState(null)
@@ -13,6 +14,7 @@ function SignUpForm() {
         try {
            const { data } = await axios.post (BASE_URL, {username, password})
             console.log('response: ', data)
+            setToken(data.token)
         } catch (error) {
             setError(error.message);
         }
